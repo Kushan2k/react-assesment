@@ -60,6 +60,9 @@ export default function ChartView() {
 
     setCarOptions({
       ...chartoptions,
+      chart: {
+        type: "column",
+      },
       categories: [selectedCategory],
       series: [
         {
@@ -94,6 +97,9 @@ export default function ChartView() {
     setCategoryInit(updatedCategoryInit);
     setCarOptions({
       ...chartoptions,
+      chart: {
+        type: "pie",
+      },
       categories: catlist,
       series: [
         {
@@ -130,6 +136,9 @@ export default function ChartView() {
 
       setCarOptions({
         ...chartoptions,
+        chart: {
+          type: "column",
+        },
         xAxis: {
           categories: categories,
         },
