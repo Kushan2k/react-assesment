@@ -66,14 +66,14 @@ npm run preview
 ## 📝 Submission Checklist
 
 - [ ] All filter requirements working
-- [ ] Pie chart updates with filter changes
+- [ *] Pie chart updates with filter changes
 - [ ] Column chart only shows after Run Report
-- [ ] Run Report button state logic correct
-- [ ] Clear filters functionality
+- [ *] Run Report button state logic correct
+- [* ] Clear filters functionality
 - [ ] TypeScript - no any types
 - [ ] Tests written and passing
-- [ ] Code is well-commented
-- [ ] Production build works
+- [ *] Code is well-commented
+- [ *] Production build works
 
 ## 🆘 Need Help?
 
