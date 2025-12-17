@@ -1,8 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { dataReducer } from "./reducers/data_reducer";
+import { filterReducer } from "./reducers/filter_redeucer";
 
 //main store
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    data: dataReducer,
+    filters: filterReducer,
+  },
 });
 
 export { store };

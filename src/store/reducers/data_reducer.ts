@@ -63,3 +63,5 @@ export const fetchData = createAsyncThunk("udata/init", async () => {
     return null;
   }
 });
+
+export const dataReducer = dataSlice.reducer;

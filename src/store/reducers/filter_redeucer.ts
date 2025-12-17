@@ -24,4 +24,4 @@ const filterSlice = createSlice({
 });
 
 export const { setChatagory, setProduct } = filterSlice.actions;
-export default filterSlice.reducer;
+export const filterReducer = filterSlice.reducer;
