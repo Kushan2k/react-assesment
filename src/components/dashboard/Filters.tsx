@@ -18,10 +18,11 @@ export default function Filters() {
   }
 
   return (
-    <div>
-      {catogories.map((cat, index) => (
-        <div key={index}>{cat}</div>
-      ))}
+    <div className="p-5">
+      <div className="title_row flex flex-row items-center justify-between">
+        <h2 className="text-2xl font-bold">Filters</h2>
+        <button>Clear</button>
+      </div>
     </div>
   );
 }
