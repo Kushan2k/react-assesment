@@ -49,6 +49,11 @@ export default function ChartView() {
   const isloading = useAppSelector((state) => state.data.isLoading);
 
   useEffect(() => {
+    if (selectedCategory == "") {
+      runInitChart();
+      return;
+    }
+
     const countprodutforSelectedCategory = products.filter(
       (prod) => prod.category === selectedCategory
     ).length;
@@ -68,6 +73,15 @@ export default function ChartView() {
   }, [selectedCategory, selectedProducts]);
 
   useEffect(() => {
+    if (!isloading) {
+      runInitChart();
+    }
+
+    //run filters after the changing of loading state
+  }, [isloading]);
+
+  //this urnction will run to created the initial chart with initail data
+  function runInitChart() {
     const updatedCategoryInit = categories.map((cat) => {
       console.log(cat);
 
@@ -76,10 +90,11 @@ export default function ChartView() {
     });
 
     console.log("updatedCategoryInit", updatedCategoryInit);
+    const catlist = Object.keys(updatedCategoryInit);
     setCategoryInit(updatedCategoryInit);
     setCarOptions({
       ...chartoptions,
-      categories: updatedCategoryInit.map((cat) => cat.name),
+      categories: catlist,
       series: [
         {
           name: "Products",
@@ -87,7 +102,59 @@ export default function ChartView() {
         },
       ],
     });
-  }, [isloading]);
+  }
+
+  const runReport = useAppSelector((state) => state.filters.runReport);
+
+  useEffect(() => {
+    //only run when runReport is true
+    if (!runReport) return;
+
+    if (selectedProducts && selectedProducts.length > 0) {
+      const filteredProducts = products.filter((product) =>
+        selectedProducts.includes(product.title.split("--")[0].trim())
+      );
+
+      const categoryCountMap: { [key: string]: number } = {};
+
+      filteredProducts.forEach((product) => {
+        if (categoryCountMap[product.category]) {
+          categoryCountMap[product.category] += 1;
+        } else {
+          categoryCountMap[product.category] = 1;
+        }
+      });
+
+      const categories = Object.keys(categoryCountMap);
+      const counts = Object.values(categoryCountMap);
+
+      setCarOptions({
+        ...chartoptions,
+        xAxis: {
+          categories: categories,
+        },
+        series: [
+          {
+            name: "Products",
+            data: counts,
+          },
+        ],
+      });
+    } else {
+      runInitChart();
+    }
+
+    //reset runReport to false after running the report
+    //to prevent infinite loop
+  }, [runReport]);
+
+  if (isloading) {
+    return (
+      <Container width={"100%"} height={"100%"}>
+        Loading chart...
+      </Container>
+    );
+  }
 
   return (
     <Container width={"100%"} height={"100%"}>

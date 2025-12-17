@@ -4,12 +4,14 @@ interface InitState {
   chatagory: string;
   product: string;
   selectedProducts?: string[];
+  runReport: boolean;
 }
 
 const initialState: InitState = {
   chatagory: "",
   product: "",
   selectedProducts: [],
+  runReport: false,
 };
 
 const filterSlice = createSlice({
@@ -24,12 +26,31 @@ const filterSlice = createSlice({
     },
     addtoSelectedProducts: (state, action: PayloadAction<string>) => {
       if (!state.selectedProducts?.includes(action.payload)) {
-        state.selectedProducts?.push(action.payload);
+        console.log("adding product", action.payload);
+        console.log("before", state.selectedProducts);
+        state.selectedProducts?.push(action.payload.split("--")[0].trim());
       }
+    },
+    removeFromSelectedProducts: (state, action: PayloadAction<string>) => {
+      state.selectedProducts = state.selectedProducts?.filter(
+        (product) => product !== action.payload
+      );
+    },
+    clearSelectedProducts: (state) => {
+      state.selectedProducts = [];
+    },
+    runReport: (state, action: PayloadAction<boolean>) => {
+      state.runReport = action.payload;
     },
   },
 });
 
-export const { setChatagory, setProduct, addtoSelectedProducts } =
-  filterSlice.actions;
+export const {
+  setChatagory,
+  setProduct,
+  addtoSelectedProducts,
+  clearSelectedProducts,
+  removeFromSelectedProducts,
+  runReport,
+} = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

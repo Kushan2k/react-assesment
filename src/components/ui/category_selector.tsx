@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/custom_redux";
 import { setChatagory } from "@/store/reducers/filter_redeucer";
 import { Portal, Select, createListCollection } from "@chakra-ui/react";
+import { useRef } from "react";
 
 export default function CategorySelector() {
   const categories = useAppSelector((state) => state.data.catagories);
@@ -14,13 +15,18 @@ export default function CategorySelector() {
 
   const dispatch = useAppDispatch();
 
+  const selectRef = useRef(null);
+
   const handleCategoryChange = (value: string) => {
     // Dispatch action to update selected category in the store
     dispatch(setChatagory(value));
   };
 
+  const selectedCategory = useAppSelector((state) => state.filters.chatagory);
+
   return (
     <Select.Root
+      ref={selectRef}
       onSelect={(details) => {
         handleCategoryChange(details.value);
       }}

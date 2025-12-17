@@ -47,7 +47,7 @@ const dataSlice = createSlice({
         state.catagories = [...catagoriesFromProducts];
         state.products = data.map((product) => {
           return {
-            title: `${product.title}- ${product.category}`,
+            title: `${product.title} -- ${product.category}`,
             category: product.category,
             qty: product.qty,
           };
