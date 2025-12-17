@@ -14,6 +14,7 @@ const initState: InitData = {
   products: [],
 };
 
+//async thunk to fetch data
 const dataSlice = createSlice({
   name: "init",
   initialState: initState,
@@ -58,6 +59,7 @@ const dataSlice = createSlice({
   },
 });
 
+//async thunk to fetch data
 export const fetchData = createAsyncThunk("udata/init", async () => {
   try {
     const data = await loadData();
