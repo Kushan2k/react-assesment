@@ -1,7 +1,8 @@
 import { fetchData } from "../../store/reducers/data_reducer";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/custom_redux";
-import { Button } from "../ui/button";
+import { Button, Heading } from "@chakra-ui/react";
+
 export default function Filters() {
   const dispatch = useAppDispatch();
 
@@ -21,11 +22,10 @@ export default function Filters() {
   return (
     <div className="p-5">
       <div className="title_row flex flex-row items-center justify-between">
-        <h2 className="text-2xl font-bold">Filters</h2>
-        <Button variant={"ghost"} title="Clear">
-          Clear
-        </Button>
+        <Heading size={"4xl"}>Filters</Heading>
+        <Button>Clear</Button>
       </div>
+      <div className="filter_section mt-10"></div>
     </div>
   );
 }

@@ -1,15 +1,16 @@
+import { Grid, GridItem } from "@chakra-ui/react";
 import ChartView from "./ChartView";
 import Filters from "./Filters";
 
 export default function DashboardSection() {
   return (
-    <div className="grid grid-cols-10 items-center justify-center gap-5 p-5 ">
-      <div className="col-span-4">
+    <Grid templateColumns="repeat(4, 1fr)" gap="6">
+      <GridItem>
         <Filters />
-      </div>
-      <div className="col-span-6">
+      </GridItem>
+      <GridItem colSpan={3}>
         <ChartView />
-      </div>
-    </div>
+      </GridItem>
+    </Grid>
   );
 }
