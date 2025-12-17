@@ -1,6 +1,7 @@
 import { fetchData } from "../../store/reducers/data_reducer";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/custom_redux";
+import { Button } from "../ui/button";
 export default function Filters() {
   const dispatch = useAppDispatch();
 
@@ -21,7 +22,9 @@ export default function Filters() {
     <div className="p-5">
       <div className="title_row flex flex-row items-center justify-between">
         <h2 className="text-2xl font-bold">Filters</h2>
-        <button>Clear</button>
+        <Button variant={"ghost"} title="Clear">
+          Clear
+        </Button>
       </div>
     </div>
   );
