@@ -5,13 +5,13 @@ import type Product from "../../types/Product";
 interface InitData {
   isLoading: boolean;
   catagories: string[];
-  products: Product[] | null;
+  products: Product[] | [];
 }
 
 const initState: InitData = {
   catagories: [],
   isLoading: true,
-  products: null,
+  products: [],
 };
 
 const dataSlice = createSlice({
@@ -30,7 +30,7 @@ const dataSlice = createSlice({
 
         if (!data) {
           state.catagories = [];
-          state.products = null;
+          state.products = [];
 
           return;
         }
@@ -44,7 +44,13 @@ const dataSlice = createSlice({
         });
 
         state.catagories = [...catagoriesFromProducts];
-        state.products = data;
+        state.products = data.map((product) => {
+          return {
+            title: `${product.title}- ${product.category}`,
+            category: product.category,
+            qty: product.qty,
+          };
+        });
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.isLoading = false;

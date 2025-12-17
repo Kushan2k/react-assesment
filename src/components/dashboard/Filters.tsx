@@ -1,14 +1,14 @@
 import { fetchData } from "../../store/reducers/data_reducer";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/custom_redux";
-import { Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, Spacer } from "@chakra-ui/react";
+import CategorySelector from "../ui/category_selector";
+import ProductMultiSelector from "../ui/product_multi_selector";
+import { setChatagory, setProduct } from "@/store/reducers/filter_redeucer";
+import RunReportButton from "../ui/run_report_btn";
 
 export default function Filters() {
   const dispatch = useAppDispatch();
-
-  const catogories = useAppSelector((state) => state.data.catagories);
-  const products = useAppSelector((state) => state.data.products);
-
   const loading = useAppSelector((state) => state.data.isLoading);
 
   useEffect(() => {
@@ -19,13 +19,30 @@ export default function Filters() {
     return <div>Loading...</div>;
   }
 
+  //   const selectedCategory = useAppSelector((state) => state.filters.chatagory);
+  //   const selectedProducts = useAppSelector((state) => state.filters.product);
+
+  function onclearClick() {
+    dispatch(setChatagory(""));
+    dispatch(setProduct(""));
+  }
+
   return (
     <div className="p-5">
       <div className="title_row flex flex-row items-center justify-between">
         <Heading size={"4xl"}>Filters</Heading>
-        <Button>Clear</Button>
+        <Button onClick={onclearClick} size={"sm"}>
+          Clear
+        </Button>
       </div>
-      <div className="filter_section mt-10"></div>
+      <Box mt={10}>
+        <CategorySelector />
+        <Spacer mt={10} />
+        <ProductMultiSelector />
+      </Box>
+      <Box mt={10}>
+        <RunReportButton />
+      </Box>
     </div>
   );
 }

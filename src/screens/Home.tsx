@@ -1,11 +1,12 @@
 import React from "react";
 import DashboardSection from "../components/dashboard/DashboardSection";
+import { Container } from "@chakra-ui/react";
 
 function Home() {
   return (
-    <div id="home_screen">
+    <Container padding={10} id="home_screen">
       <DashboardSection />
-    </div>
+    </Container>
   );
 }
 
