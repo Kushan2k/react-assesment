@@ -1,4 +1,4 @@
-# ASE Assessment Boilerplate partially completed
+# ASE Assessment Boilerplate 
 A starter template for building a Product & Category Dashboard using React, TypeScript, Redux Saga, Chakra UI, and Highcharts.
 
 ## 📋 Assessment Overview
